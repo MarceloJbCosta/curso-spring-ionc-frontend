@@ -4,9 +4,12 @@ import { Injectable } from "@angular/core";
 import { API_CONFIG } from '../config/api.config';
 import { CredenciaisDTO } from "../models/credenciais.dto";
 import { StorageService } from './storage.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService{
+
+  jwtHelper : JwtHelper = new JwtHelper();
 
   //para autenticar no back tenho que enviar email e senha para o back no endpoint login
   constructor(public http : HttpClient, public storage: StorageService){
@@ -25,7 +28,8 @@ export class AuthService{
   successFulLogin(authorizationVAlue : string){
     let tok = authorizationVAlue.substring(7);
     let user : LocalUser = {
-      token: tok
+      token: tok,
+      email: this.jwtHelper.decodeToken(tok).sub
     };
     this.storage.setLocalUser(user);
   }
