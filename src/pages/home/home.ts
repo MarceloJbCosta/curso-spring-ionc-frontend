@@ -40,7 +40,7 @@ depois que o login for feito o mnu lateral sera habilitado novamente
   login(){
     this.auth.authenticate(this.creds)
     .subscribe(response =>{
-      console.log(response.headers.get('Authorization'));
+      this.auth.successFulLogin(response.headers.get('Authorization'));
       this.navCtrl.setRoot('CategoriasPage');
     },
     error => {});
