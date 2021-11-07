@@ -29,7 +29,7 @@ export class AuthService{
     let tok = authorizationVAlue.substring(7);
     let user : LocalUser = {
       token: tok,
-      email: this.jwtHelper.decodeToken(tok).sub
+      email: this.jwtHelper.decodeToken(tok).sub // faz pegar o email do token
     };
     this.storage.setLocalUser(user);
   }
