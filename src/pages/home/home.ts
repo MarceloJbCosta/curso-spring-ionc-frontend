@@ -37,6 +37,17 @@ depois que o login for feito o mnu lateral sera habilitado novamente
     this.menu.swipeEnable(true);
 }
 
+ionViewDidEnter(){
+  this.auth.refreshToken()
+  .subscribe(response =>{
+    this.auth.successFulLogin(response.headers.get('Authorization'));
+    this.navCtrl.setRoot('CategoriasPage');
+  },
+  error => {});
+
+}
+
+
   login(){
     this.auth.authenticate(this.creds)
     .subscribe(response =>{
