@@ -1,5 +1,7 @@
 import { HttpHandler, HttpInterceptor, HttpRequest, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from '../services/storage.service';
 
@@ -7,7 +9,7 @@ import { StorageService } from '../services/storage.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(public storage : StorageService){
+  constructor(public storage : StorageService, public alertCtrl : AlertController){
 
   }
 
@@ -27,18 +29,57 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 
         switch(errorObj.status){
+          case 401:
+          this.handle401();
+          break;
+
           case 403:
             this.handle403();
             break;
+
+            default:
+              this.handleDefaultError(errorObj);
+
         }
 
-      return Observable.throw(error);
+      return Observable.throw(errorObj);
     })as any;
   }
 
   handle403(){
     this.storage.setLocalUser(null);
   }
+  handle401(){
+    //criando um alerta personalizado
+    let alert = this.alertCtrl.create({
+      title: 'Erro 401 : Falha de autenticação',
+      message: 'Email ou senha Incorreetos',
+      enableBackdropDismiss: false,//para sair do alerter tem que apertar no botao
+      buttons:[
+        {
+          text: 'Ok'
+        }
+      ]
+    });
+    alert.present();
+
+  }
+  handleDefaultError(errorObj){
+    let alert = this.alertCtrl.create({
+      title: 'Erro ' + errorObj.status + ': ' + errorObj.error,
+      message: errorObj.message,
+      enableBackdropDismiss: false,//para sair do alerter tem que apertar no botao
+      buttons:[
+        {
+          text: 'Ok'
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+
 }
 
 export const ErrorInterceptorProvider = {
