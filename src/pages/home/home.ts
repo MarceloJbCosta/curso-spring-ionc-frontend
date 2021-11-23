@@ -57,5 +57,8 @@ ionViewDidEnter(){
     error => {});
 
   }
+  signup(){
+    this.navCtrl.push('SignupPage');
+  }
 
 }
