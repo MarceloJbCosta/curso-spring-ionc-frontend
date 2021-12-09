@@ -13,7 +13,7 @@ export class ClienteService{
   }
     findByEmail(email: string): Observable<ClienteDTO>  {
 
-      //pegar o bavlor do token
+      //pegar o valor do token
       //let token = this.storage.getLocalUser().token
       //let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
 
@@ -27,5 +27,19 @@ export class ClienteService{
       let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`
       return this.http.get(url, {responseType : 'blob'});
     }
+
+    insert(obj : ClienteDTO){
+      return this.http.post(
+        `${API_CONFIG.baseUrl}/clientes`,
+        obj,
+        {
+          observe: 'response',
+          responseType: 'text'
+        }
+      );
+
+    }
+
+
 
 }
