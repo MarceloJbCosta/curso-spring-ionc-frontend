@@ -15,6 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { ClienteService } from '../services/domain/cliente.service';
+import { ProdutoService } from '../services/domain/produto.service';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ClienteService } from '../services/domain/cliente.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     StorageService,
-    ClienteService
+    ClienteService,
+    ProdutoService
 
   ]
 })
