@@ -1,4 +1,4 @@
-import { ProdutoDTO } from './produto.dto';
+import { ProdutoDTO } from "./produto.dto";
 
 export interface CartItem{
   quantidade: number,

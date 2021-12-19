@@ -12,7 +12,7 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class CartPage {
 
-  items : CartItem[];
+  items: CartItem[];
 
   constructor(
     public navCtrl: NavController,
@@ -25,10 +25,8 @@ export class CartPage {
     let cart = this.cartService.getCart();
     this.items = cart.items;
     this.loadImageUrls();
-
   }
 
-  //vai carregar as imagens pra o carrinho
   loadImageUrls(){
     for(var i=0; i<this.items.length; i++){
       let item = this.items[i];

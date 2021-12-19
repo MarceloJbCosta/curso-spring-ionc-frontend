@@ -23,7 +23,7 @@ export class StorageService{
     }
   }
 
-  getCart() : Cart{
+  getCart() : Cart {
     let str = localStorage.getItem(STORAGE_KEYS.cart);
     if(str != null){
       return JSON.parse(str);
@@ -31,9 +31,10 @@ export class StorageService{
     else{
       return null;
     }
+
   }
 
-  setCart(obj: Cart){
+  setCart(obj : Cart){
     if(obj != null){
       localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(obj));
     }
@@ -42,6 +43,7 @@ export class StorageService{
     }
 
   }
+
 
 
 }
