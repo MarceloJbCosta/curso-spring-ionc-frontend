@@ -1,3 +1,4 @@
+import { CartService } from './domain/cart.service';
 import { LocalUser } from './../models/local_user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
@@ -12,7 +13,10 @@ export class AuthService{
   jwtHelper : JwtHelper = new JwtHelper();
 
   //para autenticar no back tenho que enviar email e senha para o back no endpoint login
-  constructor(public http : HttpClient, public storage: StorageService){
+  constructor(
+    public http : HttpClient,
+    public storage: StorageService,
+    public cartService: CartService){
 
   }
 
@@ -42,6 +46,7 @@ export class AuthService{
       email: this.jwtHelper.decodeToken(tok).sub // faz pegar o email do token
     };
     this.storage.setLocalUser(user);
+    this.cartService.createOrClearCart();
   }
 
   logout(){
