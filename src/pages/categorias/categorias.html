@@ -14,7 +14,6 @@
     <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <!-- *ngFor="let item of items"> esta diretiva vai faz o componente ser reetido varias vezes-->
   <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
     <ion-thumbnail item-start>
       <img src="{{bucketUrl}}/cat{{item.id}}.jpg">

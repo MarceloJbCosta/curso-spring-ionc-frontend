@@ -15,7 +15,7 @@
       <ion-thumbnail item-start>
         <img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
-      <h2>{{item.produto}}</h2>
+      <h2>{{item.produto.nome}}</h2>
       <p>{{item.produto.preco | currency}}</p>
       <ion-icon class="nolinebreak" name="remove-circle" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
       <p class="nolinebreak" >{{item.quantidade}}</p>
@@ -32,6 +32,7 @@
       <h1>Seu Carrinho Esta vazio</h1>
     </ion-item>
   </ion-list>
-  <button ion-button (click)="goOn()">Continuar Comprando</button>
+  <button ion-button block (click)="goOn()">Continuar Comprando</button>
+  <button ion-button color="secondary" block (click)="checkout()">Finalizar pedido</button>
 
 </ion-content>
