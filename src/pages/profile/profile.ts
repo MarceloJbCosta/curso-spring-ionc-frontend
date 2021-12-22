@@ -29,7 +29,7 @@ export class ProfilePage {
     if(localUser && localUser.email){
       this.clienteService.findByEmail(localUser.email)
       .subscribe(response => {
-        this.cliente = response;
+        this.cliente = response as ClienteDTO;//colocamos o casting
         //buscar imagem, faxendo resuisiçao get para buscar a imagem
         this.getImageIfExistes();
 

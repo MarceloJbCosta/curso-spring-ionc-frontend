@@ -11,15 +11,15 @@ export class ClienteService{
   constructor( public http: HttpClient, public storage: StorageService){
 
   }
-    findByEmail(email: string): Observable<ClienteDTO>  {
+    findByEmail(email: string)  {
 
       //pegar o valor do token
       //let token = this.storage.getLocalUser().token
       //let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
 
+      //na aula 147 tiramos a tipagem do metodo, ou seja vai retornar exatamente o que esta no banco de dados
 
-      return this.http.get<ClienteDTO>(
-        `${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
+      return this.http.get(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
 
     }
     //metodo para buscar imagem no buket
