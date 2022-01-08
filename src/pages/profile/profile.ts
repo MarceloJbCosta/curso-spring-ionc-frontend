@@ -29,6 +29,10 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData(){
     let localUser = this.storage.getLocalUser();
 
     if(localUser && localUser.email){
@@ -37,7 +41,6 @@ export class ProfilePage {
         this.cliente = response as ClienteDTO;//colocamos o casting
         //buscar imagem, faxendo resuisiçao get para buscar a imagem
         this.getImageIfExistes();
-
       },
       error => {
         if(error.status == 403){
@@ -74,5 +77,21 @@ export class ProfilePage {
     (err) => {
     });
   }
+
+  sendPicture(){
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.loadData();
+      },
+      error => {
+
+      });
+  }
+
+  cancel(){
+    this.picture = null;
+  }
+
 
 }
